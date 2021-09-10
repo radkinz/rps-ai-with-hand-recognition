@@ -10,9 +10,12 @@ import {drawHand} from "./utilities";
 import * as fp from "fingerpose";
 import victory from "./gestureEmojis/victory.png";
 import thumbs_up from "./gestureEmojis/thumbs_up.png";
+import paper from "./gestureEmojis/paper.png";
+import rock from "./gestureEmojis/rock.png";
 
 //import custom gestures
-import {PaperGesture} from "./paper";
+import {PaperGesture} from "./customGestures/paper";
+import {RockGesture} from "./customGestures/rock";
 
 function App() {
   //define ref
@@ -22,7 +25,7 @@ function App() {
   //can use states to connect gesture with emoji
   const [emoji, setEmoji] = useState(null);
   //for displaying purposes
-  const images = {thumbs_up:thumbs_up, victory:victory};
+  const images = {thumbs_up:thumbs_up, victory:victory, paper:paper, rock:rock};
 
   //load handpose
   const runHandpose = async() =>{
@@ -61,13 +64,14 @@ function App() {
       const GE = new fp.GestureEstimator([
         fp.Gestures.VictoryGesture,
         fp.Gestures.ThumbsUpGesture,
-        PaperGesture
+        PaperGesture,
+        RockGesture
       ]);
 
       //estimate  gesture by sending hand and min confidence level
       const gesture = await GE.estimate(hand[0].landmarks, 8);
       if (gesture.gestures !== undefined && gesture.gestures.length > 0) { //ensure gesture was detected
-        console.log(gesture.gestures)
+       // console.log(gesture.gestures)
         
         //mapping confidence array
         const confidence = gesture.gestures.map(
