@@ -4,7 +4,7 @@ import {Finger, FingerCurl, GestureDescription} from 'fingerpose';
 //initialize new gesture
 export const RockGesture = new GestureDescription('rock');
 
-//define gesture - based on curl and direction (all fingers should be up)
+//define gesture - based on curl and direction (all fingers should be down)
 
 //thumb
 RockGesture.addCurl(Finger.Thumb, FingerCurl.FullCurl, 1.0);
