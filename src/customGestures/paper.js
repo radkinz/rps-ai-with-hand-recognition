@@ -9,21 +9,21 @@ export const PaperGesture = new GestureDescription('paper');
 //thumb
 PaperGesture.addCurl(Finger.Thumb, FingerCurl.NoCurl, 1.0);
 PaperGesture.addDirection(Finger.Thumb, FingerDirection.HorizontalLeft, 0.25);
-PaperGesture.addDirection(Finger.Thumb, FingerDirection.HorizontalRight, 0.25)
+PaperGesture.addDirection(Finger.Thumb, FingerDirection.HorizontalRight, 0.25);
 
 //index
 PaperGesture.addCurl(Finger.Index, FingerCurl.NoCurl, 1.0);
-PaperGesture.addDirection(Finger.Index, FingerDirection.VerticalUp, 0.75);
+PaperGesture.addDirection(Finger.Index, FingerDirection.VerticalUp, 1.0);
 
 //middle
 PaperGesture.addCurl(Finger.Middle, FingerCurl.NoCurl, 1.0);
-PaperGesture.addDirection(Finger.Middle, FingerDirection.VerticalUp, 0.75);
+PaperGesture.addDirection(Finger.Middle, FingerDirection.VerticalUp, 1.0);
 
 //pinky
 PaperGesture.addCurl(Finger.Pinky, FingerCurl.NoCurl, 1.0);
-PaperGesture.addDirection(Finger.Pinky, FingerDirection.VerticalUp, 0.75);
+PaperGesture.addDirection(Finger.Pinky, FingerDirection.VerticalUp, 1.0);
 
 //Ring
 PaperGesture.addCurl(Finger.Ring, FingerCurl.NoCurl, 1.0);
-PaperGesture.addDirection(Finger.Ring, FingerDirection.VerticalUp, 0.75);
+PaperGesture.addDirection(Finger.Ring, FingerDirection.VerticalUp, 1.0);
 
