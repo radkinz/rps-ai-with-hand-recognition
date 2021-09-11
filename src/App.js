@@ -8,14 +8,15 @@ import {drawHand} from "./utilities";
 
 //import stuff for gesture recognition
 import * as fp from "fingerpose";
-import victory from "./gestureEmojis/victory.png";
 import thumbs_up from "./gestureEmojis/thumbs_up.png";
+import scissors from "./gestureEmojis/scissors.jpg"
 import paper from "./gestureEmojis/paper.png";
 import rock from "./gestureEmojis/rock.png";
 
 //import custom gestures
 import {PaperGesture} from "./customGestures/paper";
 import {RockGesture} from "./customGestures/rock";
+import {ScissorsGesture} from "./customGestures/scissors";
 
 function App() {
   //define ref
@@ -25,7 +26,7 @@ function App() {
   //can use states to connect gesture with emoji
   const [emoji, setEmoji] = useState(null);
   //for displaying purposes
-  const images = {thumbs_up:thumbs_up, victory:victory, paper:paper, rock:rock};
+  const images = {thumbs_up:thumbs_up, paper:paper, rock:rock, scissors:scissors};
 
   //load handpose
   const runHandpose = async() =>{
@@ -62,16 +63,16 @@ function App() {
     if (hand.length >0) {
       //import gestures
       const GE = new fp.GestureEstimator([
-        fp.Gestures.VictoryGesture,
         fp.Gestures.ThumbsUpGesture,
         PaperGesture,
-        RockGesture
+        RockGesture,
+        ScissorsGesture
       ]);
 
       //estimate  gesture by sending hand and min confidence level
-      const gesture = await GE.estimate(hand[0].landmarks, 8);
+      const gesture = await GE.estimate(hand[0].landmarks, 4);
       if (gesture.gestures !== undefined && gesture.gestures.length > 0) { //ensure gesture was detected
-       // console.log(gesture.gestures)
+        //console.log(gesture.gestures)
         
         //mapping confidence array
         const confidence = gesture.gestures.map(
