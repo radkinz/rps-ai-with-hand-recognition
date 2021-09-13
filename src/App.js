@@ -30,6 +30,7 @@ function App() {
 
   const FunctionClick = ()=> {
     function clickHandler() {
+      console.log("clicked");
       checkGesture =! checkGesture;
     }
 
@@ -102,10 +103,19 @@ function App() {
             Math.max.apply(null, confidence)
           )
 
-          //get gesture
-          console.log(checkGesture)
-          if (checkGesture) {
+          let Timer;
+
+          function checkGestFunc() {
             console.log(gesture.gestures[maxConfidence].name);
+            checkGesture = false;
+            clearTimeout(Timer);
+          }
+
+          //get gesture
+          //console.log(checkGesture);
+          if (checkGesture) {
+            //print output then turn off check gesture
+            Timer = setTimeout(checkGestFunc, 1000);
           }
 
           //set state
