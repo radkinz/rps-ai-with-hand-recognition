@@ -118,12 +118,31 @@ function App() {
             return AIGesture
           }
 
+          function checkWinner(computerMove, playerMove) {
+
+            //first eliminate tie
+            if (computerMove === playerMove) {
+              return "tie"
+            } else {
+              if (computerMove === "rock" & playerMove === "paper" || computerMove === "paper" & playerMove === "scissors" || computerMove === "scissors" & playerMove === "rock") {
+                return "win"
+              } else {
+                return "lose"
+              }
+            }
+          }
+
           function checkGestFunc() {
             //get user's gesture
-            console.log(gesture.gestures[maxConfidence].name);
+            let usermove = gesture.gestures[maxConfidence].name;
+            console.log(usermove);
 
             //get AI's gesture
-            console.log(getAiGesture());
+            let AImove = getAiGesture();
+            console.log(AImove);
+
+            //determine winner
+            console.log(checkWinner(AImove, usermove));
 
             checkGesture = false;
             Timer = undefined;
