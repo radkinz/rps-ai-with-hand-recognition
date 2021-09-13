@@ -22,24 +22,25 @@ import { ScissorsGesture } from "./customGestures/scissors";
 
 //boolean to determine if check gesture
 let checkGesture = false;
+let Timer;
 
 function App() {
   //define ref
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
-  const FunctionClick = ()=> {
+  const FunctionClick = () => {
     function clickHandler() {
       console.log("clicked");
-      checkGesture =! checkGesture;
+      checkGesture = !checkGesture;
     }
 
     return (
-        <div>
-            <button onClick={clickHandler}>Click</button>
-        </div>
+      <div>
+        <button onClick={clickHandler}>Click</button>
+      </div>
     )
-}
+  }
 
 
   //can use states to connect gesture with emoji
@@ -91,7 +92,7 @@ function App() {
         //estimate  gesture by sending hand and min confidence level
         const gesture = await GE.estimate(hand[0].landmarks, 4);
         if (gesture.gestures !== undefined && gesture.gestures.length > 0) { //ensure gesture was detected
-         // console.log(gesture.gestures)
+          // console.log(gesture.gestures)
 
           //mapping confidence array
           const confidence = gesture.gestures.map(
@@ -103,19 +104,39 @@ function App() {
             Math.max.apply(null, confidence)
           )
 
-          let Timer;
+          function getAiGesture() {
+            let AIGesture = "rock";
+            let randomNum = Math.random();
+            if (randomNum < 0.33) {
+              AIGesture = "paper";
+            }
+
+            if (randomNum > 0.66) {
+              AIGesture = "scissors";
+            }
+
+            return AIGesture
+          }
 
           function checkGestFunc() {
+            //get user's gesture
             console.log(gesture.gestures[maxConfidence].name);
+
+            //get AI's gesture
+            console.log(getAiGesture());
+
             checkGesture = false;
-            clearTimeout(Timer);
+            Timer = undefined;
           }
 
           //get gesture
           //console.log(checkGesture);
           if (checkGesture) {
-            //print output then turn off check gesture
-            Timer = setTimeout(checkGestFunc, 1000);
+            console.log(Timer)
+            if (Timer === undefined) {
+              //print output then turn off check gesture
+              Timer = setTimeout(checkGestFunc, 300);
+            }
           }
 
           //set state
@@ -134,7 +155,7 @@ function App() {
 
   return (
     <div className="App">
-       <FunctionClick></FunctionClick>
+      <FunctionClick></FunctionClick>
       <header className="App-header">
         <Webcam ref={webcamRef}
           style={{
