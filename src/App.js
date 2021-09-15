@@ -44,7 +44,8 @@ function App() {
 
 
   //can use states to connect gesture with emoji
-  const [emoji, setEmoji] = useState(null);
+  const [Useremoji, setEmojiUser] = useState(null);
+  const [AIemoji, setEmojiAI] = useState(null);
   //for displaying purposes
   const images = { thumbs_up: thumbs_up, paper: paper, rock: rock, scissors: scissors };
 
@@ -139,6 +140,9 @@ function App() {
 
             //get AI's gesture
             let AImove = getAiGesture();
+
+            //set AI emoji state
+            setEmojiAI(AImove);
             console.log(AImove);
 
             //determine winner
@@ -159,7 +163,7 @@ function App() {
           }
 
           //set state
-          setEmoji(gesture.gestures[maxConfidence].name);
+          setEmojiUser(gesture.gestures[maxConfidence].name);
         }
 
       }
@@ -200,14 +204,16 @@ function App() {
             width: 648,
             height: 480
           }} />
-        {emoji !== null ? <img src={images[emoji]} alt="gesture" style={{
+        {Useremoji !== null ? <img src={images[Useremoji]} alt="gesture" style={{
           position: "absolute",
-          marginLeft: "auto",
-          marginRight: "auto",
-          left: 400,
-          bottom: 500,
-          right: 0,
-          textAlign: "center",
+          top: 20,
+          right: 50,
+          height: 100
+        }} /> : ""}
+        {AIemoji !== null ? <img src={images[AIemoji]} alt="gesture" style={{
+          position: "absolute",
+          top: 20,
+          left: 50,
           height: 100
         }} /> : ""}
       </header>
