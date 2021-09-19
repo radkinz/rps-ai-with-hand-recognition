@@ -29,15 +29,19 @@ function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
+  //use state to alter buttons 
+  const [game, setGameState] = useState("Click to Play");
+
   const FunctionClick = () => {
     function clickHandler() {
       console.log("clicked");
+      setGameState("Game loading");
       checkGesture = !checkGesture;
     }
 
     return (
       <div>
-        <button onClick={clickHandler}>Click</button>
+        <button onClick={clickHandler}>{game}</button>
       </div>
     )
   }
@@ -46,6 +50,7 @@ function App() {
   //can use states to connect gesture with emoji
   const [Useremoji, setEmojiUser] = useState(null);
   const [AIemoji, setEmojiAI] = useState(null);
+
   //for displaying purposes
   const images = { thumbs_up: thumbs_up, paper: paper, rock: rock, scissors: scissors };
 
@@ -148,6 +153,9 @@ function App() {
             //determine winner
             console.log(checkWinner(AImove, usermove));
 
+            //change button state
+            setGameState("Click to Play");
+
             checkGesture = false;
             Timer = undefined;
           }
@@ -158,7 +166,7 @@ function App() {
             console.log(Timer)
             if (Timer === undefined) {
               //print output then turn off check gesture
-              Timer = setTimeout(checkGestFunc, 300);
+              Timer = setTimeout(checkGestFunc, 100);
             }
           }
 
@@ -204,15 +212,26 @@ function App() {
             width: 648,
             height: 480
           }} />
+        <h2 style={{
+          position: "absolute",
+          top: 10,
+          right: 50
+        }}>Your Move</h2>
+        <h2 style={{
+          position: "absolute",
+          top: 10,
+          left: 50
+        }}>AI's Move</h2>
         {Useremoji !== null ? <img src={images[Useremoji]} alt="gesture" style={{
           position: "absolute",
-          top: 20,
+          top: 100,
+          color: "#FFFFFFF",
           right: 50,
           height: 100
         }} /> : ""}
         {AIemoji !== null ? <img src={images[AIemoji]} alt="gesture" style={{
           position: "absolute",
-          top: 20,
+          top: 100,
           left: 50,
           height: 100
         }} /> : ""}
