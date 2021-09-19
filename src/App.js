@@ -22,7 +22,6 @@ import { ScissorsGesture } from "./customGestures/scissors";
 
 //boolean to determine if check gesture
 let checkGesture = false;
-let Timer;
 
 function App() {
   //define ref
@@ -157,17 +156,12 @@ function App() {
             setGameState("Click to Play");
 
             checkGesture = false;
-            Timer = undefined;
           }
 
           //get gesture
           //console.log(checkGesture);
           if (checkGesture) {
-            console.log(Timer)
-            if (Timer === undefined) {
-              //print output then turn off check gesture
-              Timer = setTimeout(checkGestFunc, 100);
-            }
+              checkGestFunc();
           }
 
           //set state
