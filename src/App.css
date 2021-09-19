@@ -27,6 +27,21 @@
   color: #61dafb;
 }
 
+button {
+  padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: rgb(117, 216, 255);
+  border: none;
+  box-shadow: 0 5px 15px #888888;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: rgb(35, 188, 248);
+  box-shadow: 0 5px 25px #888888;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
