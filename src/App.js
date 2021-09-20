@@ -34,6 +34,9 @@ function App() {
   //use state to determine win/lose/tie
   const [outcome, setOutcome] = useState(null);
 
+  //use state to manage pop-up of otcome
+  const [popup, setPopupState] = useState(false);
+
   const FunctionClick = () => {
     function clickHandler() {
       console.log("clicked");
@@ -162,6 +165,10 @@ function App() {
             //set outcome
             setOutcome(outcome)
 
+            //show outcome with popup
+            setPopupState(true)
+            setTimeout(() => setPopupState(false), 80);
+
             checkGesture = false;
           }
 
@@ -184,6 +191,7 @@ function App() {
 
   runHandpose();
 
+  const Text = () => <div id="outcome">{outcome}</div>;
   return (
     <div className="App">
       <FunctionClick></FunctionClick>
@@ -235,21 +243,7 @@ function App() {
           left: 50,
           height: 100
         }} /> : ""}
-        <div style={{
-          position: "absolute",
-          marginLeft: "auto",
-          marginRight: "auto",
-          left: 0,
-          right: 0,
-          textAlign: "center",
-          zindex: 25,
-          padding: "20px",
-          width: "200px",
-          color: "white",
-          fontsize: "100px",
-          fontweight: 900,
-          backgroundColor: "blue"
-        }}>{outcome}</div>
+        {popup ? <Text /> : null}
       </header>
     </div>
   );
