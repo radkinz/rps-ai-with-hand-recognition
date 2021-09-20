@@ -31,6 +31,9 @@ function App() {
   //use state to alter buttons 
   const [game, setGameState] = useState("Click to Play");
 
+  //use state to determine win/lose/tie
+  const [outcome, setOutcome] = useState(null);
+
   const FunctionClick = () => {
     function clickHandler() {
       console.log("clicked");
@@ -150,18 +153,21 @@ function App() {
             console.log(AImove);
 
             //determine winner
-            console.log(checkWinner(AImove, usermove));
+            let outcome = checkWinner(AImove, usermove)
+            console.log(outcome);
 
             //change button state
             setGameState("Click to Play");
+
+            //set outcome
+            setOutcome(outcome)
 
             checkGesture = false;
           }
 
           //get gesture
-          //console.log(checkGesture);
           if (checkGesture) {
-              checkGestFunc();
+            checkGestFunc();
           }
 
           //set state
@@ -218,17 +224,32 @@ function App() {
         }}>AI's Move</h2>
         {Useremoji !== null ? <img src={images[Useremoji]} alt="gesture" style={{
           position: "absolute",
-          top: 100,
+          top: 120,
           color: "#FFFFFFF",
           right: 50,
           height: 100
         }} /> : ""}
         {AIemoji !== null ? <img src={images[AIemoji]} alt="gesture" style={{
           position: "absolute",
-          top: 100,
+          top: 120,
           left: 50,
           height: 100
         }} /> : ""}
+        <div style={{
+          position: "absolute",
+          marginLeft: "auto",
+          marginRight: "auto",
+          left: 0,
+          right: 0,
+          textAlign: "center",
+          zindex: 25,
+          padding: "20px",
+          width: "200px",
+          color: "white",
+          fontsize: "100px",
+          fontweight: 900,
+          backgroundColor: "blue"
+        }}>{outcome}</div>
       </header>
     </div>
   );
