@@ -1,16 +1,35 @@
-# A Rock Paper Scissors AI using Gesture Recognition
+# Real-Time Hand Gesture Interface (Rock–Paper–Scissors Demo)
 
-A react app that tracks your hand and gestures to play rock-paper-scissors with you and detect the outcome of each game.
+A React + TensorFlow.js demo that detects hand gestures from live webcam video and maps them to discrete intent signals (rock / paper / scissors). The project uses real-time landmark tracking and gesture classification to drive an interactive feedback loop (prediction + game outcome).
 
-## TensorFlow.js
+## System Overview
+**Webcam → Hand Landmarks → Gesture Classification → Intent Output → UI Feedback**
 
-[TensorFlow.js](https://www.tensorflow.org/js) is a javascript library that develops many machine learning models. The model that this github repo utlizes is the 
-[handpose model](https://github.com/tensorflow/tfjs-models/tree/master/handpose) to track hand and finger movements. 
+1. **Hand tracking**: TensorFlow.js Handpose detects 21 hand landmarks per frame.
+2. **Gesture recognition**: Fingerpose compares landmark geometry against gesture templates.
+3. **Interaction loop**: The UI displays the recognized gesture and computes the game outcome.
 
-## Fingerpose
+## Tech Stack
+- **React** (UI + webcam loop)
+- **TensorFlow.js Handpose** (hand landmark detection)
+- **Fingerpose** (gesture classification)
 
-[Fingerpose](https://openbase.com/js/fingerpose/documentation) is a module that utlizes TensorFlow.js's handpose model to detect hand landmarks and run gesture recognition. This module was also used to create three gestures for the program to detect: rock, paper, and scissors. Thus, the program compares the handpose model to each of the three gestures to see if the user makes any valid gesture.
+## Model: TensorFlow.js Handpose
+TensorFlow.js is a JavaScript ML library that provides pretrained models for the browser. This project uses the Handpose model to estimate hand landmarks from live video:
+- https://github.com/tensorflow/tfjs-models/tree/master/handpose
+
+## Gesture Classifier: Fingerpose
+Fingerpose uses Handpose landmarks to classify gestures. This repo defines and detects three gestures:
+- rock
+- paper
+- scissors
+Documentation:
+- https://openbase.com/js/fingerpose/documentation
 
 ## Demo Video
-
 https://user-images.githubusercontent.com/81705278/133958419-1186833c-ae29-4d4d-8aac-28ac38f82fcf.mp4
+
+## Running Locally
+```bash
+npm install
+npm start
